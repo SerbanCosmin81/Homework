@@ -98,17 +98,15 @@ namespace HomeWork1
             Console.WriteLine(myString);
             */
             //7.Write a method to display formatted text(width = 50) as output.For example: If I have a text that's 134 characters long, the formatted string should have maximum of 50 characters per line. In this case we will have 3 lines of text.
-            Console.WriteLine("Please enter a string with more than 50 letters: ");
-            string myString = Console.ReadLine();
+                      
+            Console.WriteLine("Please enter a verry long string: ");
+            string test = Console.ReadLine();
+           
+            Console.WriteLine("Please enter strig limitation: ");
+            int nInterval = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < myString.Length; i++)
-            {
-                if (myString.Length>50)
-                {
-                    string myStringMod = myString.Substring(0, 50);
-                }
-            }
-
+            string res = String.Concat(test.Select((c, i) => i > 0 && (i % nInterval) == 0 ? c.ToString() + Environment.NewLine : c.ToString()));
+            Console.WriteLine(res);
             //8.Write a method that formats a number with a percentage
             /*
             Console.WriteLine("Please enter a decimal number: ");
