@@ -98,34 +98,28 @@ namespace HomeWork1
             Console.WriteLine(myString);
             */
             //7.Write a method to display formatted text(width = 50) as output.For example: If I have a text that's 134 characters long, the formatted string should have maximum of 50 characters per line. In this case we will have 3 lines of text.
-                      
-            Console.WriteLine("Please enter a verry long string: ");
-            string test = Console.ReadLine();
-           
-            Console.WriteLine("Please enter strig limitation: ");
-            int nInterval = int.Parse(Console.ReadLine());
 
-            string res = String.Concat(test.Select((c, i) => i > 0 && (i % nInterval) == 0 ? c.ToString() + Environment.NewLine : c.ToString()));
-            Console.WriteLine(res);
+            //FormatedStringToNCaracters();//????????
+
             //8.Write a method that formats a number with a percentage
-            /*
-            Console.WriteLine("Please enter a decimal number: ");
-            float number = float.Parse(Console.ReadLine()); // or decimal or double
-            float numToPerc = number / 100;
-            Console.WriteLine("Number to percentage: {0} ",numToPerc.ToString("P"), System.Globalization.CultureInfo.InvariantCulture);
-            */
+
+            //TransformToPercentage();
+
             //9. Write a method that reverses a string.
-            /*
-            string myString = "Visual Studio 2019";
-            Console.WriteLine(myString);
-            myString = new String(myString.Reverse().ToArray());
-            Console.WriteLine(myString);
-            */
+
+            //ReveseString();
+
             //10. Write a method that strips a set of characters from a string.
+
+            //StripsSetOfCaracters();
 
             //11. Write a method that transforms to lowercase first n characters in a string
 
+            //FirstNToLower();
+
             //12. Write a method to capitalize first and last letters of each word of a given string.
+
+            FirstAndLastCharToUpp();
 
             //13. Write a method to compute sum of digits of a given string(if any).
 
@@ -153,7 +147,80 @@ namespace HomeWork1
             string myString = Console.ReadLine();
             Console.WriteLine(myString.ToLower());
         }
+        public static void TransformToPercentage()
+        {
+            Console.WriteLine("Please enter a decimal number: ");
+            float number = float.Parse(Console.ReadLine()); // or decimal or double
+            float numToPerc = number / 100;
+            Console.WriteLine("Number to percentage: {0} ", numToPerc.ToString("P"), System.Globalization.CultureInfo.InvariantCulture);
+        }
+        public static void FormatedStringToNCaracters()
+        {
+            Console.WriteLine("Please enter a string: ");
+            string test = Console.ReadLine();
 
+            Console.WriteLine("Please enter strig limitation: ");
+            int nInterval = int.Parse(Console.ReadLine());
+
+            string res = String.Concat(test.Select((c, i) => i > 0 && (i % nInterval) == 0 ? c.ToString() + Environment.NewLine : c.ToString()));
+            Console.WriteLine(res);
+        }
+        public static void ReveseString()
+        {
+            Console.WriteLine("Enter a string: ");
+            string myString = Console.ReadLine();
+            
+            myString = new String(myString.Reverse().ToArray());
+
+            Console.WriteLine(myString);
+        }
+        public static void StripsSetOfCaracters()
+        {
+            Console.WriteLine("Please enter a string: ");
+            string myString = Console.ReadLine();
+            Console.WriteLine("Enter the elements to strip: ");
+            string [] charToRemove =new string[] {Console.ReadLine()};
+
+            foreach (var element in charToRemove)
+            {
+                myString = myString.Replace(element, "");
+            }
+
+            Console.WriteLine(myString);
+
+        }
+        public static void FirstNToLower()
+        {
+            Console.WriteLine("Please enter a string: ");
+            string myString = Console.ReadLine().ToUpper();
+            Console.WriteLine(myString);
+            Console.WriteLine("how many character goes to lower: ");
+            int n = int.Parse(Console.ReadLine());
+            
+            for (int i = 0; i< myString.Length; i++)
+            {
+                if (i == n)
+                {
+                    myString = myString.Substring(0, i).ToLower() + myString.Substring(i + 1);
+                }                  
+            }
+            Console.WriteLine(myString);
+        }
+        public static void FirstAndLastCharToUpp()
+        {
+            Console.WriteLine("Please enter a sentence: ");
+            string myString = Console.ReadLine();
+            for (int i = 0; i < myString.Length; i++)
+            {
+                if (i == ' ')
+                {
+                                       
+                }
+                 
+            }
+            
+            Console.WriteLine(myString);
+        }
 
     }
 
