@@ -22,7 +22,7 @@ namespace HomeWork1
 
             //RemoveNewLine();
 
-            //FormatedStringToNCaracters();//????????
+            //FormatedStringToNCaracters();
 
             //TransformToPercentage();
 
@@ -32,11 +32,27 @@ namespace HomeWork1
 
             //FirstNToLower();
 
-            //FirstAndLastCharToUpp(); need hint
+            //FirstAndLastCharToUpp();
 
             //ComputeSumOfDigits();
 
-            //RemoveSpecialCharacters(); need hint for replacing double or triple " "
+            //RemoveSpecialCharacters(); need hint for replacing double or triple " "   ?????????????
+
+            //IngLy();
+
+            //ObfucateEmail();
+            //ObfucateEmail2();
+
+            //ReString();
+
+            //ReplaceOccNotTheFirst();
+
+            //SwapingFirstTwoOfEachString(); 
+
+
+
+            //Palindrome1();
+
 
 
         }
@@ -145,19 +161,35 @@ namespace HomeWork1
         }
 
         //7.Write a method to display formatted text(width = 50) as output.For example: If I have a text that's 134 characters long, the formatted string should have maximum of 50 characters per line. In this case we will have 3 lines of text.
-        /// <summary>
-        /// doesnt work
-        /// </summary>
+
         public static void FormatedStringToNCaracters()
         {
-            Console.WriteLine("Please enter a string: ");
+            Console.WriteLine("Please enter a string between 0 and 20 char: ");
             string test = Console.ReadLine();
 
-            Console.WriteLine("Please enter strig limitation: ");
-            int nInterval = int.Parse(Console.ReadLine());
+            Console.WriteLine("string limitation is set to 5 \n ");
+            int nInterval = 5;
 
-            string res = String.Concat(test.Select((c, i) => i > 0 && (i % nInterval) == 0 ? c.ToString() + Environment.NewLine : c.ToString()));
-            Console.WriteLine(res);
+
+            if (test.Length <= nInterval)
+            {
+                Console.WriteLine(test + " IS TO SHORT TO BE SPLITED");
+            }
+            else if (test.Length >nInterval && test.Length<=nInterval*2)
+            {
+                test = test.Substring(0, 5) + Environment.NewLine + test.Substring(5);
+                Console.WriteLine(test);
+                
+            }
+            else if(test.Length >nInterval*2 && test.Length <= nInterval * 4)
+            {
+                test = test.Substring(0, 5) + Environment.NewLine + test.Substring(5, 5) + Environment.NewLine + test.Substring(10,5) + Environment.NewLine + test.Substring(15);
+                Console.WriteLine(test);
+            }
+
+
+            //string res = String.Concat(test.Select((c, i) => i > 0 && (i % nInterval) == 0 ? c.ToString() + Environment.NewLine : c.ToString()));
+            //Console.WriteLine(res);
         }
 
         //8.Write a method that formats a number with a percentage
@@ -224,12 +256,29 @@ namespace HomeWork1
 
         public static void FirstAndLastCharToUpp()
         {
-            Console.WriteLine("Please Enter A sentetece: ");
+            Console.WriteLine("Please enter a sentence: ");
             string myString = Console.ReadLine();
-            
 
+            string myStringTemp = "";
+            if (myString.Length > 0)
+            {
+                myStringTemp = myString[0].ToString();
+                myString = myString.Remove(0, 1).Insert(0, myStringTemp.ToUpper());
 
-            ////doesnt work
+                for (int i = 1; i < myString.Length - 1; i++)
+                {
+                    myStringTemp = myString[i].ToString();
+                    if (myString[i + 1].ToString() == " " || myString[i - 1].ToString() == " ") // keeping track of white spaces
+                    {
+                        myString = myString.Remove(i, 1).Insert(i, myStringTemp.ToUpper());
+                    }
+                }
+
+                myStringTemp = myString[myString.Length - 1].ToString();
+                myString = myString.Remove(myString.Length - 1, 1).Insert(myString.Length - 1, myStringTemp.ToUpper());
+            }
+            Console.WriteLine(myString);
+
         }
 
         //13. Write a method to compute sum of digits of a given string(if any).
@@ -254,7 +303,7 @@ namespace HomeWork1
         //You will get a text from where you will need to clean the text because it contains a lot of strange characters that don’t belong there(^ <, > &+ @%$)
 
         //Input:
-        
+
         //                     Output:
         //Hi there I’m telling you, you need to do your homeworks. Hate me now and thank me later. 
 
@@ -264,9 +313,9 @@ namespace HomeWork1
             Console.WriteLine(str);
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i <= str.Length-1; i++)
+            for (int i = 0; i <= str.Length - 1; i++)
             {
-                if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i]==' ' || str[i]=='.' || str[i] ==',' || str[i]== '’')  
+                if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == ' ' || str[i] == '.' || str[i] == ',' || str[i] == '’')
                 {
                     sb.Append(str[i]);
                 }
@@ -274,11 +323,160 @@ namespace HomeWork1
 
             Console.WriteLine(sb.ToString().Trim());
 
-            
-
-
-            
         }
+
+
+        //15. Write a method to add 'ing' at the end of a given string (length should be at least 3). If the given string already ends with 'ing' then add 'ly' instead. If the string length of the given string is less than 3, leave it unchanged.
+        //Input : 'abc'
+        //Output : 'abcing' 
+        //Input : 'string'
+        //Output: 'stringly'
+
+        public static void IngLy()
+        {
+            Console.WriteLine("Enter a word: ");
+            string myString = Console.ReadLine();
+            char[] temp = myString.ToCharArray();
+
+            if (temp[myString.Length - 1] == 'g' && (temp[myString.Length - 2] == 'n') && (temp[myString.Length - 3] == 'i'))
+            {
+                myString = myString + "ly";
+                Console.WriteLine(myString);
+            }
+            else if (temp.Length >= 3)
+            {
+                myString = myString + "ing";
+                Console.WriteLine(myString);
+            }
+
+        }
+
+        //16. Obfucate Email
+        //You have some text that contains your email address.And you want to hide that.You decide to censor your email: to replace all characters in it with asterisks ('*') except the domain.Assume your email address will always be in format[username]@[domain]. You need to replace the username with asterisks of equal number of letters and keep the domain unchanged.You will get as input the email address you need to obfuscate
+        //Input: awesome @dotnet.com
+        //Output: *******@dotnet.com
+
+        public static void ObfucateEmail()
+        {
+            Console.WriteLine("Enter your email: ");
+            string email = Console.ReadLine();
+            var user = email.Substring(0, email.IndexOf("@"));
+            var domain = email.Substring(email.LastIndexOf("@"));
+
+            foreach (var c in user)
+            {
+                user = user.Replace(c, '*');
+            }
+
+            Console.WriteLine(user + domain);
+
+        }
+
+        public static void ObfucateEmail2()
+        {
+            Console.WriteLine("Enter your email: ");
+            string email = Console.ReadLine();
+            var obfEmail = email;
+
+            var maskedEmail = string.Format("{0}**{1}", obfEmail[0], obfEmail.Substring(obfEmail.IndexOf('@') - 1));
+            Console.WriteLine(maskedEmail);
+        }
+
+        //17. Re-string
+        //Write a method to get a string made of the first 2 and the last 2 chars from a given a string. If the string length is less than 2,
+        //return instead of the empty string.
+
+        public static void ReString()
+        {
+            Console.WriteLine("Enter a word:");
+            string mystring = Console.ReadLine();
+            char[] reString = mystring.ToCharArray();
+
+            if (mystring.Length >= 2)
+            {
+                Console.WriteLine("{0}{1}{2}{3}", reString[0], reString[1], reString[reString.Length - 2], reString[reString.Length - 1]);
+            }
+            else if (mystring.Length < 2)
+            {
+                Console.WriteLine("my string is NULL");
+            }
+
+
+        }
+
+        //18. Replace Char
+        //Write a method to get a string from a given string where all occurrences of its first char have been changed to '$', except the first char itself.
+
+        public static void ReplaceOccNotTheFirst()
+        {
+            Console.WriteLine("Enter a word: ");
+            string myString = Console.ReadLine();
+
+            char temp = myString[0];
+
+            Console.WriteLine(myString[0].ToString() + myString.Substring(1).Replace(temp, '$'));
+
+
+        }
+
+        //19. Write a method to get a single string from two given strings, separated by a space and swap the first two characters of each string.
+        //Input: 'abc', 'xyz' 
+        //Output: 'xyc abz'
+
+        public static void SwapingFirstTwoOfEachString()
+        {
+            Console.WriteLine("Enter a word: ");
+            string myString1 = Console.ReadLine();
+
+            Console.WriteLine("Enter a word: ");
+            string myString2 = Console.ReadLine();
+
+            string mySwaped = "";
+
+            for (int i = 0; i < myString1.Length; i++)
+            {
+                mySwaped = myString2.Substring(0, 2) + myString1.Substring(2) + "---" + myString1.Substring(0, 2) + myString2.Substring(2);
+            }
+
+            Console.WriteLine(mySwaped);
+        }
+
+        //20. Write a method to find the first appearance of the substring 'not' and 'poor' from a given string, if 'not' follows the 'poor', replace the whole 'not'...'poor' substring with 'good'. Return the resulting string.
+        //Input: 'The lyrics is not that poor!'
+        //Output : 'The lyrics is poor!'
+        //Input  : 'The lyrics is good!'
+        //Output : 'The lyrics is poor!'
+
+        public static void AppearanceOfSubstring()
+        {
+
+        }
+
+        //Palindrome
+        //Check if a string is palindrome(same value read from left to right and right to left) Ex: alabala -> True
+
+        public static void Palindrome1()
+        {
+            Console.WriteLine("Enter a word: ");
+            string myString = Console.ReadLine();
+            string myStringReverse = new string(myString.ToCharArray().Reverse().ToArray());
+            if (myString.Equals(myStringReverse))
+            {
+                Console.WriteLine("String is Palindrome \n You entered first: {0} and it came up like this: \n {1}", myString, myStringReverse);
+            }
+            else
+            {
+                Console.WriteLine("String is NOT PALINDROME \n You entered first: {0} and it came up like this: \n {1}", myString, myStringReverse);
+            }
+        }
+
+
+
+
+
+
+
+
 
         public static void ToUpper()
         {
