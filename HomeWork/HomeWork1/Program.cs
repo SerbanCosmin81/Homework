@@ -14,6 +14,8 @@ namespace HomeWork1
 
             //RemoveOddIndex();
 
+            //RemoveOddIndexSB();
+
             //StringToUppAndToLow(); 
 
             //ReverseStringforLenghtMultFour();
@@ -34,22 +36,35 @@ namespace HomeWork1
 
             //FirstAndLastCharToUpp();
 
+            //FirstAndLastCharToUpp2();
+
             //ComputeSumOfDigits();
 
-            //RemoveSpecialCharacters(); need hint for replacing double or triple " "   ?????????????
+            //RemoveSpecialCharacters(); 
+            //RemoveSpecialCharacters2();
 
             //IngLy();
 
             //ObfucateEmail();
-            //ObfucateEmail2();
 
             //ReString();
 
-            //ReplaceOccNotTheFirst();
+            //ReplaceOccNotTheFirst(); for a word
+            //RelaceFirstOccButNotTheFirst(); //for each word in a sentence "ana avea mamaliga si susan si cascaval"
 
             //SwapingFirstTwoOfEachString(); 
 
+            //AppearanceOfSubstring();
 
+            //LongestWord();
+
+            //LastPartBeforespecifiedChar();
+
+            //StartWith();
+
+            //CountOccOfSubStrInString();
+
+            //SwapCommaWithDot();
 
             //Palindrome1();
 
@@ -92,6 +107,20 @@ namespace HomeWork1
 
             }
             Console.WriteLine(result);
+        }
+        public static void RemoveOddIndexSB()
+        {
+            Console.Write("Please enter a string: ");
+            string userInput = Console.ReadLine();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i <= userInput.Length - 1; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    sb.Append(userInput[i]);
+                }
+            }
+            Console.WriteLine(sb.ToString());
         }
 
         //3. Write a method that takes input from the user and displays that input back in upper and lower cases.
@@ -175,15 +204,15 @@ namespace HomeWork1
             {
                 Console.WriteLine(test + " IS TO SHORT TO BE SPLITED");
             }
-            else if (test.Length >nInterval && test.Length<=nInterval*2)
+            else if (test.Length > nInterval && test.Length <= nInterval * 2)
             {
                 test = test.Substring(0, 5) + Environment.NewLine + test.Substring(5);
                 Console.WriteLine(test);
-                
+
             }
-            else if(test.Length >nInterval*2 && test.Length <= nInterval * 4)
+            else if (test.Length > nInterval * 2 && test.Length <= nInterval * 4)
             {
-                test = test.Substring(0, 5) + Environment.NewLine + test.Substring(5, 5) + Environment.NewLine + test.Substring(10,5) + Environment.NewLine + test.Substring(15);
+                test = test.Substring(0, 5) + Environment.NewLine + test.Substring(5, 5) + Environment.NewLine + test.Substring(10, 5) + Environment.NewLine + test.Substring(15);
                 Console.WriteLine(test);
             }
 
@@ -198,8 +227,7 @@ namespace HomeWork1
         {
             Console.WriteLine("Please enter a decimal number: ");
             float number = float.Parse(Console.ReadLine()); // or decimal or double
-            float numToPerc = number / 100;
-            Console.WriteLine("Number to percentage: {0} ", numToPerc.ToString("P"), System.Globalization.CultureInfo.InvariantCulture);
+            Console.WriteLine("Number to percentage: {0} ", number.ToString("P2"));
         }
 
         //9. Write a method that reverses a string.
@@ -281,6 +309,24 @@ namespace HomeWork1
 
         }
 
+        public static void FirstAndLastCharToUpp2()
+        {
+            Console.WriteLine("Please enter a sentence: ");
+            string myString = Console.ReadLine();
+
+            string[] words = myString.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            var result = "";
+
+            foreach (var word in words)
+            {
+
+                result += char.ToUpper(word[0]) + word.Substring(1, word.Length - 2) + char.ToUpper(word[word.Length - 1]) + ' ';
+
+            }
+            Console.WriteLine(result);
+        }
+
         //13. Write a method to compute sum of digits of a given string(if any).
 
         public static void ComputeSumOfDigits()
@@ -293,7 +339,7 @@ namespace HomeWork1
             {
                 if (numb[i] >= '0' && numb[i] <= '9')
                 {
-                    sum += numb[i] - '0';
+                    sum += int.Parse(numb[i].ToString());
                 }
             }
             Console.WriteLine(sum);
@@ -324,6 +370,32 @@ namespace HomeWork1
             Console.WriteLine(sb.ToString().Trim());
 
         }
+
+        public static void RemoveSpecialCharacters2()
+        {
+            string exemplu = " Hi ^> there << I’m + telling %% you, you & need % to$ do &your $homeworks.@Hate ^ me ^ % now % and % thank % me & later.";
+            Console.WriteLine(exemplu);
+            string[] special = new string[] { "^", "<", ">", "&", "+", "@", "%", "$" };
+
+            foreach (var c in special)
+            {
+                exemplu = exemplu.Replace(c, "");
+            }
+            Console.WriteLine(exemplu);
+
+            string[] cleanExemplu = exemplu.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            var cleanMultiSpaces = "";
+
+            foreach (var word in cleanExemplu)
+            {
+                cleanMultiSpaces += word + ' ';
+            }
+
+            Console.WriteLine(cleanMultiSpaces);
+
+        }
+
 
 
         //15. Write a method to add 'ing' at the end of a given string (length should be at least 3). If the given string already ends with 'ing' then add 'ly' instead. If the string length of the given string is less than 3, leave it unchanged.
@@ -372,15 +444,6 @@ namespace HomeWork1
 
         }
 
-        public static void ObfucateEmail2()
-        {
-            Console.WriteLine("Enter your email: ");
-            string email = Console.ReadLine();
-            var obfEmail = email;
-
-            var maskedEmail = string.Format("{0}**{1}", obfEmail[0], obfEmail.Substring(obfEmail.IndexOf('@') - 1));
-            Console.WriteLine(maskedEmail);
-        }
 
         //17. Re-string
         //Write a method to get a string made of the first 2 and the last 2 chars from a given a string. If the string length is less than 2,
@@ -419,6 +482,24 @@ namespace HomeWork1
 
         }
 
+        public static void RelaceFirstOccButNotTheFirst()
+        {
+            Console.WriteLine("Please enter a sentence: ");
+            string myString = Console.ReadLine();
+
+            string[] words = myString.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            var result = "";
+
+            foreach (var word in words)
+            {
+                char temp = word[0];
+                result += word.Substring(0, 1) + word.Substring(1, word.Length - 1).Replace(temp, '$') + ' ';
+
+            }
+            Console.WriteLine(result);
+        }
+
         //19. Write a method to get a single string from two given strings, separated by a space and swap the first two characters of each string.
         //Input: 'abc', 'xyz' 
         //Output: 'xyc abz'
@@ -449,6 +530,122 @@ namespace HomeWork1
 
         public static void AppearanceOfSubstring()
         {
+            Console.WriteLine("Write your sentence: ");
+            string input = Console.ReadLine();
+
+
+            if (input.Contains("not") && input.IndexOf("not") < input.IndexOf("poor"))
+            {
+                Console.WriteLine(input.Substring(0, input.IndexOf("not")) + "good" + input.Substring(input.IndexOf("poor") + 4));
+            }
+
+            if (input.Contains("good"))
+            {
+                var text2 = input.Replace("good", "poor");
+                Console.WriteLine(text2);
+
+            }
+
+
+        }
+
+        //21. Write a method that takes a list of words and returns the length of the longest one.
+        public static void LongestWord()
+        {
+            Console.WriteLine("Enter a word: ");
+            string myString = Console.ReadLine();
+            string[] words = myString.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            int maxLength = words[0].Length;
+
+            for (int i = 1; i < words.Length; i++)
+            {
+                if (maxLength < words[i].Length)
+
+                    maxLength = words[i].Length;
+
+            }
+
+
+            Console.WriteLine(maxLength);
+        }
+
+        //22. Write a method to get the last part of a string before a specified character.
+        //Input :  https://www.siit.com/net-exercises
+        //Output:  https://www.siit.com/net
+        public static void LastPartBeforespecifiedChar()
+        {
+            string myString = "https://www.siit.com/net-exercises";
+            Console.WriteLine(myString);
+            Console.WriteLine("Enter char or sign: ");
+            string caracter = Console.ReadLine();
+
+            Console.WriteLine(myString.Substring(0, myString.IndexOf(caracter)));
+
+
+        }
+
+        //23. Write a method to check whether a string starts with specified characters
+        //input: awesome string
+        //               a
+        //output : Yes, starts with a
+        public static void StartWith()
+        {
+            string myString = "awesome string";
+            Console.WriteLine(myString);
+            Console.WriteLine("Enter char or sign: ");
+            string caracter = Console.ReadLine();
+
+            if (myString.IndexOf(caracter) == 0)
+                Console.WriteLine($"Yes, YOUR string starts with {caracter}");
+            else
+                Console.WriteLine($"No, YOUR string doesn't start with {caracter}");
+        }
+
+
+        //24. Write a method to count occurrences of a substring in a string
+        public static void CountOccOfSubStrInString()
+        {
+            Console.WriteLine("Please enter your string: ");
+            string myString = Console.ReadLine();
+            Console.WriteLine("Please enter substring to check: ");
+            string mySubString = Console.ReadLine();
+            int index = 0;
+            int repeat = 0;
+            while ((repeat = myString.IndexOf(mySubString, repeat)) != -1)
+            {
+
+                repeat += mySubString.Length;
+                index++;
+
+            }
+            if (index == 0)
+            {
+                Console.WriteLine($"We didn't find your substring in the given string !!!");
+            }
+            else
+            {
+                Console.WriteLine($"We find your substring for {index} times!!!");
+            }
+
+
+        }
+
+        //25. Write a method to swap comma and dot in a string.
+
+        public static void SwapCommaWithDot()
+        {
+            Console.WriteLine("Enter a sentence that contains COMMA and DOTT: ");
+            string myString = Console.ReadLine();
+            char comma = ',';
+            char dott = '.';
+
+            char[] mySwapedString = myString.ToCharArray();
+
+            char temp = mySwapedString[myString.IndexOf(comma)];
+            mySwapedString[myString.IndexOf(comma)] = mySwapedString[myString.IndexOf(dott)];
+            mySwapedString[myString.IndexOf(dott)] = temp;
+
+            Console.WriteLine(mySwapedString);
 
         }
 
